@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { StyleSheet, View, FlatList, Alert } from "react-native";
+import { StyleSheet, View, FlatList, Alert, Button } from "react-native";
 import TodosInput from "./components/TodosInput";
 import TodosItem from "./components/TodosItem";
 
 export default function App() {
   const [todosInput, setTodosInput] = useState("");
   const [todos, setTodos] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const addModalHandler = () => {
+    setIsModalVisible(true);
+  };
 
   const onchangeHandler = (text) => {
     setTodosInput(text);
@@ -25,6 +30,7 @@ export default function App() {
         { id: Math.random().toString(), text: todosInput },
       ]);
       setTodosInput("");
+      setIsModalVisible(false);
     }
   };
 
@@ -47,10 +53,13 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
+      <Button onPress={addModalHandler} title="Add New Goal" color="#5e0acc" />
       <TodosInput
         todosInput={todosInput}
         onchangeHandler={onchangeHandler}
         addTodo={addTodo}
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
       />
       <View style={styles.goalsContainer}>
         <FlatList

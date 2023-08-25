@@ -1,17 +1,36 @@
-import { StyleSheet, TextInput, View, Button } from "react-native";
+import { StyleSheet, TextInput, View, Button, Modal } from "react-native";
 import React from "react";
 
-const TodosInput = ({ onchangeHandler, addTodo, todosInput }) => {
+const TodosInput = ({
+  onchangeHandler,
+  addTodo,
+  todosInput,
+  isModalVisible,
+  setIsModalVisible,
+}) => {
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        onChangeText={(newText) => onchangeHandler(newText)}
-        style={styles.textInput}
-        placeholder="What's your goal?"
-        value={todosInput}
-      />
-      <Button onPress={addTodo} title="Add Goal" />
-    </View>
+    <Modal visible={isModalVisible} animationType={"slide"}>
+      <View style={styles.inputContainer}>
+        <TextInput
+          onChangeText={(newText) => onchangeHandler(newText)}
+          style={styles.textInput}
+          placeholder="What's your goal?"
+          value={todosInput}
+        />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button onPress={addTodo} title="Add Goal" />
+          </View>
+          <View style={styles.button}>
+            <Button
+              onPress={() => setIsModalVisible(false)}
+              title="Cancel"
+              color="red"
+            />
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 };
 
@@ -20,8 +39,7 @@ export default TodosInput;
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     marginBottom: 24,
   },
@@ -32,5 +50,13 @@ const styles = StyleSheet.create({
     marginRight: 8,
     padding: 8,
     borderRadius: 6,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+  },
+  button: {
+    width: "30%",
+    marginHorizontal: 10,
+    marginTop: 10,
   },
 });
