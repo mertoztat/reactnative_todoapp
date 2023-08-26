@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { StyleSheet, View, FlatList, Alert, Button } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import TodosInput from "./components/TodosInput";
 import TodosItem from "./components/TodosItem";
 
@@ -52,25 +53,32 @@ export default function App() {
   };
 
   return (
-    <View style={styles.appContainer}>
-      <Button onPress={addModalHandler} title="Add New Goal" color="#5e0acc" />
-      <TodosInput
-        todosInput={todosInput}
-        onchangeHandler={onchangeHandler}
-        addTodo={addTodo}
-        isModalVisible={isModalVisible}
-        setIsModalVisible={setIsModalVisible}
-      />
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={todos}
-          renderItem={(itemData) => {
-            return <TodosItem itemData={itemData} deleteTodo={deleteTodo} />;
-          }}
-          keyExtractor={(item, index) => item.id}
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        <Button
+          onPress={addModalHandler}
+          title="Add New Goal"
+          color="#5e0acc"
         />
+        <TodosInput
+          todosInput={todosInput}
+          onchangeHandler={onchangeHandler}
+          addTodo={addTodo}
+          isModalVisible={isModalVisible}
+          setIsModalVisible={setIsModalVisible}
+        />
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={todos}
+            renderItem={(itemData) => {
+              return <TodosItem itemData={itemData} deleteTodo={deleteTodo} />;
+            }}
+            keyExtractor={(item, index) => item.id}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -79,6 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 60,
     paddingHorizontal: 16,
+    backgroundColor: "#1e085a",
   },
 
   goalsContainer: {
