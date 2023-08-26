@@ -1,4 +1,11 @@
-import { StyleSheet, TextInput, View, Button, Modal } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Button,
+  Modal,
+  Image,
+} from "react-native";
 import React from "react";
 
 const TodosInput = ({
@@ -11,6 +18,10 @@ const TodosInput = ({
   return (
     <Modal visible={isModalVisible} animationType={"slide"}>
       <View style={styles.inputContainer}>
+        <Image
+          source={require("../assets/images/goal.png")}
+          style={styles.image}
+        />
         <TextInput
           onChangeText={(newText) => onchangeHandler(newText)}
           style={styles.textInput}
@@ -41,7 +52,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
   },
   textInput: {
     borderWidth: 1,
@@ -50,6 +60,8 @@ const styles = StyleSheet.create({
     marginRight: 8,
     padding: 8,
     borderRadius: 6,
+    color: "white",
+    fontSize: 16,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -58,5 +70,10 @@ const styles = StyleSheet.create({
     width: "30%",
     marginHorizontal: 10,
     marginTop: 10,
+  },
+  image: {
+    width: 150,
+    height: 150,
+    margin: 20,
   },
 });
